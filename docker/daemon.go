@@ -79,6 +79,7 @@ func mainDaemon() {
 		flag.Usage()
 		return
 	}
+	//engineの生成
 	eng := engine.New()
 	signal.Trap(eng.Shutdown)
 
@@ -101,6 +102,8 @@ func mainDaemon() {
 	// the http api so that connections don't fail while the daemon
 	// is booting
 	go func() {
+		//goルーチンによるdeamon起動
+		//daemon生成
 		d, err := daemon.NewDaemon(daemonCfg, eng)
 		if err != nil {
 			log.Fatal(err)
@@ -121,6 +124,7 @@ func mainDaemon() {
 
 		// after the daemon is done setting up we can tell the api to start
 		// accepting connections
+		//daemon実行
 		if err := eng.Job("acceptconnections").Run(); err != nil {
 			log.Fatal(err)
 		}

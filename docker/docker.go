@@ -33,6 +33,7 @@ func main() {
 	// FIXME: validate daemon flags here
 
 	if *flVersion {
+		//バージョン表示フラグセットならバージョン表示
 		showVersion()
 		return
 	}
@@ -70,10 +71,11 @@ func main() {
 	setDefaultConfFlag(flTrustKey, defaultTrustKeyFile)
 
 	if *flDaemon {
+		//デーモン起動
 		mainDaemon()
 		return
 	}
-
+	//以下クライアント
 	if len(flHosts) > 1 {
 		log.Fatal("Please specify only one -H")
 	}
@@ -124,7 +126,7 @@ func main() {
 	} else {
 		cli = client.NewDockerCli(os.Stdin, os.Stdout, os.Stderr, *flTrustKey, protoAddrParts[0], protoAddrParts[1], nil)
 	}
-
+	//クライアントコマンド実行
 	if err := cli.Cmd(flag.Args()...); err != nil {
 		if sterr, ok := err.(*utils.StatusError); ok {
 			if sterr.Status != "" {

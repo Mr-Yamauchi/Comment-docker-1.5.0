@@ -54,7 +54,7 @@ func (d *driver) Name() string {
 	version := d.version()
 	return fmt.Sprintf("%s-%s", DriverName, version)
 }
-
+//lxcƒhƒ‰ƒCƒo‚ÌRun
 func (d *driver) Run(c *execdriver.Command, pipes *execdriver.Pipes, startCallback execdriver.StartCallback) (execdriver.ExitStatus, error) {
 	var (
 		term execdriver.Terminal
